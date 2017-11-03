@@ -1,0 +1,65 @@
+<html>
+
+<head>
+</head>
+
+
+<body>
+
+    <p>Please enter a search term into the textbox to begin searching.</p>
+    <input type="text" id="userIn" onkeyup="useData(getData())" placeholder="Enter search term">
+
+    <script>
+        let url = "https://raw.githubusercontent.com/ewomackQA/JSONDataRepo/master/kings.json";
+
+        let request = new XMLHttpRequest();
+        request.open('GET', url, true);
+        request.responseType = 'json';
+        request.send();
+
+
+        request.onload = function () {
+            getData();
+
+        }
+
+        function getData() {
+            let kingsData = request.response;
+            return kingsData;
+        }
+
+        function useData(kingsArray) {
+
+            let search = document.getElementById("userIn").value;
+            search = search.toLowerCase();
+            document.getElementById("para").innerHTML = "";
+            for (let entry in kingsArray) {
+                for (let key in kingsArray[entry]) {
+                    let tempTerm = kingsArray[entry][key].toLowerCase();
+                    if (search == "") {
+                        document.getElementById("para").innerHTML += kingsArray[entry].nm + "<br>";
+                        document.getElementById("para").innerHTML += kingsArray[entry].hse + "<br>";
+                        document.getElementById("para").innerHTML += kingsArray[entry].yrs + "<br>";
+                        document.getElementById("para").innerHTML += kingsArray[entry].cty + "<br><br>";
+                        break;
+                    }
+                    else if (tempTerm.includes(search)) {
+                        document.getElementById("para").innerHTML += kingsArray[entry].nm + "<br>";
+                        document.getElementById("para").innerHTML += kingsArray[entry].hse + "<br>";
+                        document.getElementById("para").innerHTML += kingsArray[entry].yrs + "<br>";
+                        document.getElementById("para").innerHTML += kingsArray[entry].cty + "<br><br>";
+                        break;
+                    }
+                }
+
+            }
+
+
+
+
+        }
+    </script>
+</body>
+<p id="para"></p>
+
+</html>

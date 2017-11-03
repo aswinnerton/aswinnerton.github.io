@@ -1,0 +1,52 @@
+<html>
+    <head>
+        </head>
+    <body>
+
+<input type = "button" onclick="createPara()" value = "Create Paragraph" />
+
+<br><br>
+
+<input type = "text" id = "userInput" />
+<input type = "button" onclick="changeText()" value = "Change Text" />
+
+<br><br>
+
+<input type = "button" onclick="deletePara()" value = "Delete Paragraph" />
+
+        <script>
+            'use strict';
+
+            function createPara(){
+                let createP = document.createElement("P");
+                createP.id = "para1";
+                let node = document.createTextNode("New Paragraph.");
+                createP.appendChild(node);
+                document.body.appendChild(createP);
+            }
+
+            function changeText(){
+                if(document.body.contains(document.getElementById("para1"))){
+                    let change = document.getElementById("para1");
+                    let textVal = document.getElementById("userInput").value;
+                    change.innerHTML = textVal;
+                }
+            }
+
+            function deletePara(){
+                if (document.body.contains(document.getElementById("para1"))){
+                let deleteP = document.getElementById("para1");
+                document.body.removeChild(deleteP);
+                }
+                else{
+                    console.log("no paragraph to delete");
+                }
+                
+
+            }
+
+</script>
+
+
+        </body>
+</html>
