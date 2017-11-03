@@ -6,14 +6,20 @@
 let vehicles = [];
 let garage = [];
 function createCar() {
-
+    //overwrite paragraph to empty in case an error is already showing
     document.getElementById("newVehiclePara").innerHTML = "";
+
+    //get user input as registration number of vehicle to be created, force to upper case for storage purposes, do same for brand
     let reg = document.getElementById("carRegIn").value;
     reg = reg.toUpperCase();
     let brand = document.getElementById("carBrand").value;
     brand = brand.toUpperCase();
+
+    //initialise faults as a number for object element storage, set exist variable currently to false
     let faults = 0;
     let exists = false;
+
+    //loop through cars currently in vehicle array to find matching reg plates, if a match is found, vehicle already exists and won't be entered
     for (let car in vehicles) {
         if (reg == vehicles[car].carReg) {
             exists = true;
@@ -22,18 +28,23 @@ function createCar() {
     if (exists) {
         document.getElementById("newVehiclePara").innerHTML = "Car already exists.";
     }
+
+    //assign details to newCar object based on user input, then push to the vehicle array
     else {
         let newCar = { carReg: reg, carBrand: brand, carFaults: faults, carBill: ("£" + (faults * 30)) };
 
         vehicles.push(newCar);
 
+        //add the reg number to the check in drop down selector box
         let select = document.getElementById("regSelectIn");
         select.options[select.options.length] = new Option(newCar.carReg, newCar.carReg);
     }
 }
 
+//simple function to return what vehicles are currently in the garage
 function garageList() {
     document.getElementById("garagePara").innerHTML = "";
+    //loop through vehicles to get keys and attributes of the vehicles to be output to garage paragraph
     for (let car in garage) {
         for (let key in garage[car]) {
             document.getElementById("garagePara").innerHTML += key + ": " + garage[car][key] + "<br>";
@@ -42,14 +53,21 @@ function garageList() {
     }
 }
 
+//check in function to enter cars from the vehicle list to the garage
 function checkIn() {
+
+    //initialise index for which vehicle is being entered from the check in drop down list, as well as the dropdown box itself
     let index = document.getElementById("regSelectIn").selectedIndex;
     let selectIn = document.getElementById("regSelectIn");
 
+    //default for empty boxes is -1, which breaks everything, so this if loop avoids it
+    //reg takes currently selected dropdown option, faults takes use fault number for input into vehicle fault element 
     if (index != -1) {
         let reg = selectIn.options[index].value;
         let faults = parseInt(document.getElementById("carFaultIn").value);
 
+        //for loop loops through every car in vehicle array, if a matching reg is hit, set the new fault values, determine bill from this
+        //then push to garage array and add to the check out drop down list
         for (let car in vehicles) {
             if (vehicles[car].carReg == reg) {
                 vehicles[car].carFaults = faults;
@@ -59,10 +77,12 @@ function checkIn() {
                 selectOut.options[selectOut.options.length] = new Option(vehicles[car].carReg, vehicles[car].carReg);
             }
         }
+        //remove checked in vehicle from the check in list so that it cannot be checked in more than once
         selectIn.options[index].remove(index);
     }
 }
 
+//check out function to remove vehicles from garage
 function checkOut() {
 
     let index = document.getElementById("regSelectOut").selectedIndex;
@@ -138,11 +158,15 @@ function adminConsole() {
     else if (tempString[0].includes("CHECKIN") && tempString.length === 3) {
 
         let adminReg = "";
+        if(tempString[1].includes("-")){
+            tempString[1].replace("-"," ");
+        }
         let adminFaults = 0;
         let carInGarage = false;
         let selectIn = document.getElementById("regSelectIn");
         adminReg = tempString[1];
         adminFaults = parseInt(tempString[2]);
+        //for reg input, since most regs have a space in the middle and im a doof, will have to use a "-" for manual input then after the split, replace - with space
 
         for (let car in garage) {
             if (garage[car].carReg == adminReg) {
