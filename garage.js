@@ -121,6 +121,9 @@ function adminConsole() {
         let brand = "";
         let faults = 0;
         let exists = false;
+        if (tempString[1].includes("-")) {
+            tempString[1].replace("-", " ");
+        }
         reg = tempString[1];
         brand = tempString[2];
         //loop through every car to check if reg is already in database, stop command if it exists already
@@ -158,8 +161,8 @@ function adminConsole() {
     else if (tempString[0].includes("CHECKIN") && tempString.length === 3) {
 
         let adminReg = "";
-        if(tempString[1].includes("-")){
-            tempString[1].replace("-"," ");
+        if (tempString[1].includes("-")) {
+            tempString[1].replace("-", " ");
         }
         let adminFaults = 0;
         let carInGarage = false;

@@ -1,0 +1,44 @@
+<html>
+<head></head>
+
+<body>
+    
+<script>
+function fizzBuzz(){
+    document.getElementById("fizzPara").innerHTML = "";
+    let userInput = parseInt(document.getElementById("userIn").value);
+    for (i = userInput; i > 0; i--){
+        
+        if((i % 3 == 0) && (i % 5 == 0)){
+            document.getElementById("fizzPara").innerHTML += (i +  ": FizzBuzz <br>");
+        }
+        else if (i%3 == 0){
+            document.getElementById("fizzPara").innerHTML += (i + ": Fizz <br>");
+        }
+        else if(i % 5 == 0){
+            document.getElementById("fizzPara").innerHTML += (i + ": Buzz <br>");
+        }
+        else{
+            document.getElementById("fizzPara").innerHTML += (i + "<br>");
+        }
+    }
+}
+
+</script>
+
+<h3>Fizz Buzz</h3>
+
+<p>
+
+    <input type="text" id="userIn" placeholder="enter a number">
+    <input type="button" onclick="fizzBuzz()" value="submit">
+</p>
+<p id="fizzPara">
+
+    
+
+
+</p>
+
+</body>    
+</html>
