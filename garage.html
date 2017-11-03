@@ -1,0 +1,65 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Swinny's Garage</title>
+    <script type="text/javascript" src="garage.js"></script>
+</head>
+
+<body>
+    
+    <div>
+        <h3>Create Vehicle</h3><br></div>
+    <div>
+        <input type="text" id="carRegIn" placeholder="Vehicle registration number"><br>
+        <input type="text" id="carBrand" placeholder="Enter Vehicle Brand">
+        <input type="button" onclick="createCar()" value="submit"><br>
+        <p id="newVehiclePara"></p>
+    </div>
+    
+    
+    <div id="checkIn">
+        <h3>Check in Vehicle</h3>
+    </div>
+    <select id="regSelectIn"></select><br>
+
+<input type="number" id="carFaultIn" placeholder="Enter number of faults">
+<input type="button" onclick="checkIn()" value="submit">
+
+    <div>
+        <h3>Check out Vehicle</h3>
+    </div>
+    <div id="garageCout">
+        <select id="regSelectOut"></select>
+        <input type="button" onclick="checkOut()" value="submit">
+    </div>
+
+<div>
+    <h3>Admin Console</h3>
+    <input type="text" id="adminInput" placeholder="enter command">
+    <input type="button" onclick="adminConsole()" value="submit">
+<p>Admin Command List: <br><br>
+    CREATE: will create a vehicle for use, use in format (ignore parentheses): CREATE (reg) (brand)
+    <p style="text-indent: 1em;">Example: CREATE ABCD AUDI</p>
+    OUTPUT: print the garage list, use in format: OUTPUT GARAGE<br>
+    CHECKIN: check in an existing vehicle into the garage, use in format: CHECKIN (reg) (no. of faults)
+    <p style="text-indent: 1em;">Example: CHECKIN ABCD 2</p>
+    CHECKOUT: check out an existing vehicle from the garage, use in formst: CHECKOUT (reg)
+</p>
+<p id="adminOutput"></p>
+</div>
+
+    <div>
+        <h3>Garage Contents</h3>
+    </div>
+    <div id="garageContent">
+        <input type="button" onclick="garageList()" value="Get Garage">
+        <p id="garagePara"></p>
+    </div>
+
+
+</body>
+
+</html>
